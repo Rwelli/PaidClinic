@@ -6,7 +6,6 @@
              xmlns:vm="clr-namespace:PaidClinic.ViewModels"
              x:DataType="vm:ReportViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
              x:Class="PaidClinic.Views.ReportPage">
     
     <Design.DataContext>
