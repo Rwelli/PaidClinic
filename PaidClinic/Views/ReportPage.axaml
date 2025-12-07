@@ -54,6 +54,7 @@
                     Grid.Column="2"
                     SeriesSource="{Binding ReportAppealData}"
                     Background="#ff303030">
+                    
                     <lvc:PieChart.SeriesTemplate>
                         <DataTemplate x:DataType="vm:PieData">
                             <lvc:XamlPieSeries
