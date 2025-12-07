@@ -72,7 +72,3 @@ PaidClinic-Portable.zip
 # !Data/Template.mdb
 # !Data/Template.db
 
-# Включаем только нужные файлы данных
-Data/Clinic.mdb
-Data/clinic.db
-!Data/Template.*
