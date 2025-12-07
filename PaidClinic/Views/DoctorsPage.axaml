@@ -1,0 +1,153 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:PaidClinic.ViewModels"
+             xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             x:DataType="vm:DoctorsViewModel"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PaidClinic.Views.DoctorsPage">
+
+    <Design.DataContext>
+        <vm:DoctorsViewModel />
+    </Design.DataContext>
+
+    <dialogHost:DialogHost
+        Identifier="DoctorsDialogHost"
+        CloseOnClickAway="True" BorderBrush="Transparent"
+        BlurBackground="True"
+        dialogHost:DialogHostStyle.CornerRadius="8">
+        <StackPanel Orientation="Vertical" Margin="10">
+            <Label Content="Врачи:"
+                   FontSize="16"
+                   Margin="0 5"
+                   FontWeight="SemiBold" />
+            <DataGrid Name="DataGridDoctors" ItemsSource="{Binding Doctors}"
+                      GridLinesVisibility="All"
+                      IsReadOnly="True"
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
+                      Margin="12 4"
+                      Height="300"
+                      SelectionChanged="DataGridSelectedDoctor">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" />
+                    <DataGridTextColumn Header="Специальность" Binding="{Binding Speciality}" />
+                    <DataGridTextColumn Header="Категория" Binding="{Binding Category}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <StackPanel
+                    Grid.Column="0"
+                    Orientation="Vertical" Classes="doctor-labels">
+                    <Label Content="Фамилия:" />
+                    <Label Content="Имя:" />
+                    <Label Content="Отчество:" />
+                    <Label Content="Специальность:" />
+                    <Label Content="Категория:" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Orientation="Vertical"
+                    Classes="doctor-labels">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            Text="{Binding Doctor.FirstName}" />
+                        <Button 
+                            Grid.Column="1" CornerRadius="80" Classes="Flat"
+                            Width="50" Height="50"
+                            Command="{Binding ClearFirstName}">
+                            <materialIcons:MaterialIcon Kind="Clear" />
+                        </Button>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            Text="{Binding Doctor.LastName}" />
+                        <Button 
+                            Grid.Column="1" CornerRadius="80" Classes="Flat"
+                            Width="50" Height="50"
+                            Command="{Binding ClearLastName}">
+                            <materialIcons:MaterialIcon Kind="Clear" />
+                        </Button>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            Text="{Binding Doctor.MiddleName}" />
+                        <Button 
+                            Grid.Column="1" CornerRadius="80" Classes="Flat"
+                            Width="50" Height="50"
+                            Command="{Binding ClearMiddleName}">
+                            <materialIcons:MaterialIcon Kind="Clear" />
+                        </Button>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            Text="{Binding Doctor.Speciality}" />
+                        <Button 
+                            Grid.Column="1" CornerRadius="80" Classes="Flat"
+                            Width="50" Height="50"
+                            Command="{Binding ClearSpecialty}">
+                            <materialIcons:MaterialIcon Kind="Clear" />
+                        </Button>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            Text="{Binding Doctor.Category}" />
+                        <Button 
+                            Grid.Column="1" CornerRadius="80" Classes="Flat"
+                            Width="50" Height="50"
+                            Command="{Binding ClearCategory}">
+                            <materialIcons:MaterialIcon Kind="Clear" />
+                        </Button>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Right" ColumnDefinitions="Auto,Auto,Auto">
+                        <Button
+                            Grid.Column="0"
+                            Margin="10"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Right"
+                            Classes="Flat Accent"
+                            Foreground="Red"
+                            Content="Удалить"
+                            Click="RemoveDoctorFromDataGrid" />
+                        <Button
+                            Grid.Column="1"
+                            Margin="10"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Center"
+                            Classes="Flat"
+                            Command="{Binding EditDoctorCommand}"
+                            Content="Изменить" />
+                        <Button
+                            Grid.Column="2"
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            FontWeight="Bold"
+                            Content="Добавить"
+                            Command="{Binding AddDoctorCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <dialogHost:DialogHost.DialogContent>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Action}"/>
+                <Button Content="Ок"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                         AncestorType=dialogHost:DialogHost}, Path=CloseDialogCommand}"/>
+            </StackPanel>
+        </dialogHost:DialogHost.DialogContent>
+    </dialogHost:DialogHost>
+</UserControl>

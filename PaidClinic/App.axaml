@@ -1,0 +1,25 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
+             xmlns:dataGrid="clr-namespace:Material.Avalonia.DataGrid;assembly=Material.Avalonia.DataGrid"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             x:Class="PaidClinic.App"
+             xmlns:local="using:PaidClinic"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Blue" SecondaryColor="Green"/>
+        <materialIcons:MaterialIconStyles />
+        <dataGrid:MaterialDataGridStyles />
+        <dialogHostAvalonia:DialogHostStyles />
+        <!-- <FluentTheme DensityStyle="Compact"/> -->
+        <StyleInclude Source="Styles/General.axaml"/>
+        <StyleInclude Source="Styles/ReportPageStyle.axaml"/>
+    </Application.Styles>
+</Application>

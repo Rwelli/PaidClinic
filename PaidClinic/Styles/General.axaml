@@ -1,0 +1,28 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector=".doctor-labels>Label">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="5 6"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style Selector=".doctor-labels TextBox">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="5 6"/>
+    </Style>
+    
+    <Style Selector="TextBox /template/ Panel#PART_TextFieldPanel">
+        <Setter Property="MinHeight" Value="0"/>
+    </Style>
+</Styles>

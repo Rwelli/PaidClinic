@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PaidClinic.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PaidClinic.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PaidClinic">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    
+    <Grid RowDefinitions="Auto,*">
+        <DockPanel Grid.Row="0" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Врачи" Click="MenuItemDoctorsClick"/>
+                <MenuItem Header="Пациенты" Click="MenuItemPatientClick"/>
+                <MenuItem Header="Обращения" Click="MenuItemAppealClick"/>
+                <MenuItem Header="Отчеты" Click="MenuItemReportClick"/>
+                <!-- <MenuItem Header="Сменить тему"> -->
+                <!--     <MenuItem Header="Светлая" Click="ChangeThemeOnLight"/> -->
+                <!--     <MenuItem Header="Темная" Click="ChangeThemeOnNight"/> -->
+                <!-- </MenuItem> -->
+                <MenuItem Header="Выход" Click="MenuItemExitClick"/>
+            </Menu>
+        </DockPanel>
+        
+        <Border Grid.Row="1">
+            <ScrollViewer 
+                VerticalScrollBarVisibility="Visible"
+                Height="{Binding $parent.Height}">
+                <ContentControl Name="MainControl"/>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

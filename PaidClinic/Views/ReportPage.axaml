@@ -1,0 +1,75 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+             xmlns:vm="clr-namespace:PaidClinic.ViewModels"
+             x:DataType="vm:ReportViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
+             x:Class="PaidClinic.Views.ReportPage">
+    
+    <Design.DataContext>
+        <vm:ReportViewModel />
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="Auto,*" Grid.Row="0" Margin="12">
+            <StackPanel Classes="header" Grid.Column="0" Orientation="Horizontal" Spacing="25">
+                <TextBlock Text="Начало периода:"/>
+                <DatePicker SelectedDate="{Binding BeginDate}"/>
+                <TextBlock Text="Конец периода:"/>
+                <DatePicker SelectedDate="{Binding EndDate}"/>
+            </StackPanel>
+            <Border Grid.Column="1">
+                <Button 
+                    Classes="Outline Accent"
+                    Content="Получить отчет"
+                    HorizontalAlignment="Right"
+                    Margin="8"
+                    Command="{Binding LoadReportAppealsCommand}"/>
+            </Border>
+        </Grid>
+        <Grid RowDefinitions="Auto,*" Grid.Row="1">
+            <Separator Grid.Row="0"/>
+            <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto,*" Height="{Binding $parent.Height}">
+                <DataGrid
+                    VerticalAlignment="Top"
+                    Grid.Column="0" ItemsSource="{Binding ReportAppeals}"
+                    GridLinesVisibility="All"
+                    IsReadOnly="True"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Margin="12 4"
+                    Height="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Врач" Binding="{Binding Doctor.LastNameWithInitials}"/>
+                        <DataGridTextColumn Header="Объем услуг" Binding="{Binding CostOfTreatment}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Border Grid.Column="1" Background="DarkSlateGray" Width="0.5" Margin="5"/>
+                <lvc:PieChart
+                    Width="400"
+                    Height="400"
+                    Grid.Column="2"
+                    SeriesSource="{Binding ReportAppealData}"
+                    Background="#ff303030">
+                    <lvc:PieChart.SeriesTemplate>
+                        <DataTemplate x:DataType="vm:PieData">
+                            <lvc:XamlPieSeries
+                                SeriesName="{Binding Name}"
+                                Values="{Binding Values}"/>
+                        </DataTemplate>
+                    </lvc:PieChart.SeriesTemplate>
+                    <lvc:PieChart.Title>
+                        <lvc:XamlDrawnLabelVisual
+                            Text="Объем услуг по врачам"
+                            Paint="{lvc:SolidColorPaint Color='#fff'}"
+                            TextSize="20"
+                            Padding="{lvc:Padding '15'}"/>
+                    </lvc:PieChart.Title>
+                </lvc:PieChart>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

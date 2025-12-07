@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+        <!-- Оптимизации -->
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+        <DebugType>embedded</DebugType>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+
+        <!-- Уменьшение размера -->
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>link</TrimMode>
+
+        <!-- Исключаем лишнее -->
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Data\Clinic.mdb">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.3.9" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.9" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.9" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.9">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="DialogHost.Avalonia" Version="0.10.2" />
+        <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc6.1" />
+        <PackageReference Include="Material.Avalonia" Version="3.13.3" />
+        <PackageReference Include="Material.Avalonia.DataGrid" Version="3.13.3" />
+        <PackageReference Include="Material.Icons.Avalonia" Version="3.0.0-preview3.1" />
+        <PackageReference Include="ReactiveUI.Avalonia" Version="11.3.8" />
+        <PackageReference Include="System.Data.OleDb" Version="10.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\" />
+    </ItemGroup>
+</Project>

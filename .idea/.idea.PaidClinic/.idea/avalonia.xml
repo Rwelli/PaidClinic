@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="PaidClinic/App.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Styles/General.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Styles/ReportPageStyle.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/AppealPage.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/DoctorsPage.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/MainWindow.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/PacientPage.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/PatientPage.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Views/ReportPage.axaml" value="PaidClinic/PaidClinic.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
