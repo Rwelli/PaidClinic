@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="PaidClinic/App.axaml" value="PaidClinic/PaidClinic.csproj" />
+        <entry key="PaidClinic/Controls/ErrorReportWindow.axaml" value="PaidClinic/PaidClinic.csproj" />
         <entry key="PaidClinic/Styles/General.axaml" value="PaidClinic/PaidClinic.csproj" />
         <entry key="PaidClinic/Styles/ReportPageStyle.axaml" value="PaidClinic/PaidClinic.csproj" />
         <entry key="PaidClinic/Views/AppealPage.axaml" value="PaidClinic/PaidClinic.csproj" />

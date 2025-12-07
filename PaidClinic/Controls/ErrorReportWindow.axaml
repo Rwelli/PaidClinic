@@ -1,0 +1,39 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
+        x:Class="PaidClinic.Controls.ErrorReportWindow"
+        xmlns:vm="using:PaidClinic.ViewModels"
+        x:DataType="vm:ErrorReportWindowViewModel"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaToDecorationsHint="False"
+        SystemDecorations="None"
+        Background="Transparent"
+        Width="500" Height="300"
+        WindowStartupLocation="CenterOwner"
+        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        Title="ErrorReportWindow">
+    
+    <Design.DataContext>
+        <vm:ErrorReportWindowViewModel />
+    </Design.DataContext>
+    
+    <controls:Card
+        Margin="15">
+        <Grid RowDefinitions="Auto, *, Auto" Margin="15">
+            <TextBlock 
+                Grid.Row="0"
+                Text="Критическая ошибка"
+                Classes="Headline6"/>
+            <TextBox Grid.Row="1" Text="{Binding ErrorText}" Margin="0 15"/>
+            <Button
+                Grid.Row="2" 
+                HorizontalAlignment="Right"
+                Classes="Flat"
+                FontSize="17"
+                Content="Ok"
+                Click="CloseApplication"/>
+        </Grid>
+    </controls:Card>
+</Window>

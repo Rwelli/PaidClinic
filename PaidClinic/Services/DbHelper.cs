@@ -25,11 +25,6 @@ public static class DbHelper
 
     public static OleDbConnection CreateConnection()
     {
-        File.Create("log.txt").Close();
-        TextWriter textWriter = new StreamWriter("log.txt");
-        textWriter.WriteLine(GetDatabasePath());
-        textWriter.Close();
-        Console.WriteLine(GetDatabasePath());
         string connectionString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={GetDatabasePath()};" +
                                   "Persist Security Info=False;Jet OLEDB:Engine Type=5;";
 

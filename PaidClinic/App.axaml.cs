@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using PaidClinic.Controls;
 using PaidClinic.ViewModels;
 using PaidClinic.Views;
 
@@ -39,50 +40,42 @@ public partial class App : Application
 
     private void DisableAvaloniaDataAnnotationValidation()
     {
-        // Get an array of plugins to remove
         var dataValidationPluginsToRemove =
             BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
-        // remove each entry found
         foreach (var plugin in dataValidationPluginsToRemove)
         {
             BindingPlugins.DataValidators.Remove(plugin);
         }
     }
     
-        private void RegisterExceptionHandlers()
+    private void RegisterExceptionHandlers()
     {
-        // Обработка неперехваченных исключений в UI потоке
         Avalonia.Threading.Dispatcher.UIThread.UnhandledException += (sender, e) =>
         {
-            e.Handled = true; // Помечаем как обработанное
+            e.Handled = true;
             ShowExceptionDialog("UI Thread Exception", e.Exception);
         };
 
-        // Обработка исключений в AppDomain
         AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
         {
             var exception = e.ExceptionObject as Exception;
             ShowExceptionDialog("Unhandled Exception", exception);
             
-            // Для критических ошибок можно завершить приложение
             if (e.IsTerminating)
             {
-                // Логирование или другие действия перед завершением
             }
         };
 
-        // Для обработки Task исключений (если используете async/await)
         TaskScheduler.UnobservedTaskException += (sender, e) =>
         {
-            e.SetObserved(); // Помечаем как обработанное
+            e.SetObserved();
             ShowExceptionDialog("Task Exception", e.Exception);
         };
     }
 
     private void ShowExceptionDialog(string title, Exception exception)
     {
-        // Используем диспетчер, если мы не в UI потоке
         if (Avalonia.Threading.Dispatcher.UIThread.CheckAccess())
         {
             ShowDialog(title, exception);
@@ -96,20 +89,29 @@ public partial class App : Application
 
     private async void ShowDialog(string title, Exception exception)
     {
-        // Можно также логировать ошибку
         LogException(exception);
+
+        var errorWindow = new ErrorReportWindow
+        {
+            DataContext = new ErrorReportWindowViewModel { ErrorText = exception.Message }
+        };
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime { MainWindow: not null } desktopLifetime)
+        {
+            await errorWindow.ShowDialog(desktopLifetime.MainWindow);
+        }
     }
 
     private void LogException(Exception exception)
     {
-        // Логирование в файл, базу данных или сервис
         var logMessage = $"[{DateTime.Now}] {exception}\n{exception.StackTrace}\n\n";
         
-        // Пример записи в файл
         try
         {
             File.AppendAllText("error_log.txt", logMessage);
         }
-        catch { /* Игнорируем ошибки логирования */ }
+        catch
+        {
+            // ignored
+        }
     }
 }
