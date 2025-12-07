@@ -82,7 +82,6 @@ public class DoctorsViewModel : ViewModelBase
 
     public void RemoveDoctor(Doctor doctor)
     {
-        throw new System.NotImplementedException();
         Doctor = doctor;
         DeleteDoctorCommand.Execute();
         LoadDoctorsCommand.Execute();
