@@ -46,6 +46,7 @@ avalonia.packages/
 # Rider
 .idea/
 *.sln.iml
+.idea/.idea.PaidClinic/.idea
 
 # NuGet packages
 *.nupkg
